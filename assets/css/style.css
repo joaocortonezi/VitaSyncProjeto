@@ -1,0 +1,212 @@
+html {
+    font-size: 62.5%;
+    overscroll-behavior: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+}
+
+input, button, select, textarea {
+    font: inherit;
+    color: inherit;
+}
+
+#loginPage {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+#welcomeSide {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #115E59;
+}
+
+#welcomeAssets {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 8rem 0;
+    height: 100%;
+    width: 100%;
+    max-width: 50.0rem;
+}
+
+.logo {
+    font-size: 3.5rem;
+    color: #FFFFFF;
+}
+
+.logo strong {
+    font-style: italic;
+    font-weight: 700;
+}
+
+#welcomeTexts {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.welcomeTitle {
+    font-size: 5.2rem;
+    color: #FFFFFF;
+    line-height: 5rem;
+}
+
+.welcomeDesc {
+    font-size: 2.0rem;
+    color: #FFFFFF;
+    font-weight: normal;
+}
+
+.obs {
+    font-size: 1.2rem;
+    color: #FFFFFF;
+}
+
+#loginSide {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F9FAFB;
+}
+
+#formsAssets {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 40rem;
+    gap: 2.4rem;
+}
+
+.formsTexts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.titleInicio {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.descInicio {
+    font-size: 1.5rem;
+    color: #6B7280;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.6rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.labelForms {
+    font-size: 1.4rem;
+    font-weight: normal;
+    color: #6B7280;
+}
+
+.formsInput {
+    width: 100%;
+    height: 4.8rem;
+    border: 1px solid #D1D5DB;
+    border-radius: 0.8rem;
+    padding: 1.0rem;
+    font-size: 1.4rem;
+    font-weight: normal;
+}
+
+.optionsGroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2rem;
+}
+
+.forgotPasswordForms {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #6B7280;
+    text-decoration: none;
+}
+
+.forgotPasswordForms:hover{
+    text-decoration: underline;
+}
+
+.rememberMe {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #6B7280;
+    cursor: pointer;
+}
+
+.rememberMe input {
+    accent-color: #0F766E;
+}
+
+.formsError {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.4rem;
+    color: #B91C1C;
+}
+
+.errorIcon {
+    width: 1.6rem;
+    height: 1.6rem;
+    flex-shrink: 0;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+
+.formsSubmit {
+    height: 4.8rem;
+    width: 100%;
+    border-radius: 0.8rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    background-color: #0F766E;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+}
+
+.formsSubmit:hover {
+    background-color: #115E59;
+}
+
+.formsSubmit:active {
+    background-color: #134E4A;
+}

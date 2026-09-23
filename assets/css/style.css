@@ -1,6 +1,58 @@
+/*=== 1. BASE ===*/
 html {
     font-size: 62.5%;
     overscroll-behavior: none;
+}
+
+:root {
+    /* === CORES PRIMÁRIAS === */
+    --color-primary: #0F766E; /* BOTÃO PRIMÁRIO, CHECKBOX MARCADO, BORDA DE INPUT EM FOCO, LINK DE DESTAQUE */
+    --color-primary-dark: #115E59; /* FUNDO ESCURO, HOVER EM BOTÕES */
+    --color-primary-pressed: #134E4A; /* BOTÃO NO CLICADO/ON CLICK */
+    --color-primary-light: #CCFBF1; /* BLOCOS DE AGENDAMENTO, FUNDO DE ITENS SELECIONADOS */
+
+    /* === CORES NEUTRAS === */
+    --color-text: #111827; /* TEXTO PRINCIPAL, TEXTO DE INPUT *DIGITADO*, NOME DE CLEINTE */
+    --color-text-muted: #6B7280; /* TEXTO SECUNDÁRIO, LABELS, DESC, LINKS DE APOIO */
+    --color-placeholder: #9CA3AF; /* COR DOS TEXTOS DE EXEMPLOS DOS INPUTS */
+    --color-border: #D1D5DB; /* BORDAS DE INPUT, BOTÃO NEUTRO, LINHAS DIVISÓRIAS DA AGENDA */
+    --color-bg: #F9FAFB; /* FUNDO DA PÁGINA */
+    --color-white: #FFFFFF; /* CARDS, CAMPOS, TEXTO SOBRE FUNDOS ESCUROS */
+
+    /* === CORES SEMÂNTICAS === */
+    --color-error: #B91C1C; /* TEXTO DE ERRO */
+    --color-error-strong: #DC2626; /* BORDA DE INPUT INVÁLIDO, BOTÃO DE CANCELAMENTO/DESTRUTIVO */
+    --color-error-bg: #FEF2F2; /* FUNDO DE FAIXA DE AVISO */
+    --color-success: #15803D; /* TEXTO DE SUCESSO */
+    --color-success-bg: #F0FDF4; /* FUNDO DE FAIXAS/CARDS DE SUCESSO */
+    --color-warning: #B45309; /* TEXTO DE PEDENCIAS/URGÊNCIAS */
+    --color-warning-bg: #FFFBEB; /* FUNDO DE FAIXA DE CUIDADO */
+
+    /* === TIPOGRAFIA === */
+    --text-display: 5.2rem; /* TEXTO DE DESTAQUE COMO O DA LOGIN PAGE */
+    --text-logo: 3.5rem; /* TAMANHO LOGO, JÁ QUE NOSSO LOGO É UM P */
+    --text-h1: 2.8rem; /* TEXTO DE TÍTULOS (ASSUNTO DA PÁGINA, TODA PÁGINA TEM QUE TER SOMENTE 1 H1) */
+    --text-h2: 2.4rem; /* TEXTO DE SUBTITULOS */
+    --text-lead: 2.0rem; /* TEXTOS DE APOIOS, GERALMENTE USADO APÓS UM TÍTULO GRANDE */
+    --text-h3: 1.6rem; /* SUBDIVISÃO DE UM H2 */
+    --text-body: 1.4rem; /* TEXTOS CORRIDOS, PARAGRAFOS E ETC... */
+    --text-support: 1.2rem; /* INFORMAÇÃO QUE PRECISA ESTAR PRESENTE MAS NÃO DEVE SER LIDA ANTES DO RESTO COMO: "Esqueceu a senha?", "Lembrar acesso", "Sistema de Agendamento · Projeto Interdisciplinar ADS"*/
+
+    /* === TAMANHOS === */
+    --size-control: 4.8rem; /* ALTURA DE CONTROLES COMO: INPUTS, SELECTS, BUTTONS E ETC... MENOS TEXT AREAS (TEXTOS GRANDES) POIS CRESCE CONFORME O CONTEÚDO */
+    --radius-sm: 0.8rem; /* CURVATURA DAS BORDAS DE INPUT, BOTÃO, FAIXA DE AVISO. TUDO QUE TENHA 48PX DE ALTURA. */
+    --radius-md: 1.2rem; /* CURVATURA DAS BORDAS DE CARDS COMO NOVO CLIENTE */
+    --radius-lg: 1.6rem; /* CURVATURA DAS BORDAS DE MODAL (JANELAS QUE ABRE POR CIMA DA TELA, CONHECIDO COMO POP-UPS) */
+    --space-page: 8rem; /* PADDING VERTICAL (APLICAR EM PADDING-TOP E PADDING-BOTTOM) DE PÁGINAS INTEIRAS, GERALMENTE NÃO TEM BARRAS DE NAVEGAÇÃO */
+    --space-section: 3.2rem: /* PADDING VERTICAL (APLICAR EM PADDING-TOP E PADDING-BOTTOM) DE PÁGINAS COM NAVBAR NO TOP, É A DISTÂNCIA MINIMA DOS CONTÉUDOS DA NAV */
+
+    /* === PESOS === */
+    /* === TOMANDO COMO REFÊRENCIA O FIGMA, CONVERTEREMOS OS PESOS DE REGULAR, MEDIUM, BOLD... PARA OS SEGUINTES PESOS EM NÚMERO === */ 
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+
 }
 
 * {
@@ -13,102 +65,42 @@ body {
     font-family: "Inter", sans-serif;
 }
 
-input, button, select, textarea {
+/* USADO PARA FORÇAR CONTROLS A HERDAR A FONTE DEFINIDA EM BODY */
+input, button, select, textarea { 
     font: inherit;
     color: inherit;
 }
 
-#loginPage {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
+/* FORÇA TAGS COM HIDDEN A REALMENTE FICAREM ESCONDIDAS IGNORANDO AS PROPRIEDADES DE display DOS PAIS */
+[hidden] {
+    display: none !important;
 }
 
-#welcomeSide {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #115E59;
-}
-
-#welcomeAssets {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 8rem 0;
-    height: 100%;
-    width: 100%;
-    max-width: 50.0rem;
-}
-
+/* === 2. COMPONENTES ===*/
 .logo {
-    font-size: 3.5rem;
-    color: #FFFFFF;
+    font-size: var(--text-logo);
 }
 
 .logo strong {
     font-style: italic;
-    font-weight: 700;
+    font-weight: var(--weight-bold);
 }
 
-#welcomeTexts {
-    display: flex;
-    flex-direction: column;
-    gap: 1.6rem;
-}
-
-.welcomeTitle {
-    font-size: 5.2rem;
-    color: #FFFFFF;
-    line-height: 5rem;
-}
-
-.welcomeDesc {
-    font-size: 2.0rem;
-    color: #FFFFFF;
-    font-weight: normal;
-}
-
-.obs {
-    font-size: 1.2rem;
-    color: #FFFFFF;
-}
-
-#loginSide {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #F9FAFB;
-}
-
-#formsAssets {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 40rem;
-    gap: 2.4rem;
-}
-
-.formsTexts {
+.card__header {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
 }
 
-.titleInicio {
-    font-size: 2.4rem;
-    font-weight: 600;
-    color: #111827;
+.card__title {
+    font-size: var(--text-h2);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
 }
 
-.descInicio {
-    font-size: 1.5rem;
-    color: #6B7280;
+.card__desc {
+    font-size: var(--text-body);
+    color: var(--color-text-muted);
 }
 
 .form {
@@ -118,95 +110,165 @@ input, button, select, textarea {
     gap: 1.6rem;
 }
 
-.formGroup {
+.field {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
 }
 
-.labelForms {
-    font-size: 1.4rem;
-    font-weight: normal;
-    color: #6B7280;
+.label {
+    font-size: var(--text-body);
+    font-weight: var(--weight-regular);
+    color: var(--color-text-muted);
 }
 
-.formsInput {
+.input {
     width: 100%;
-    height: 4.8rem;
-    border: 1px solid #D1D5DB;
-    border-radius: 0.8rem;
-    padding: 1.0rem;
-    font-size: 1.4rem;
-    font-weight: normal;
+    height: var(--size-control);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0 1.2rem;
+    font-size: var(--text-body);
+    font-weight: var(--weight-regular);
 }
 
-.optionsGroup {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.2rem;
-}
-
-.forgotPasswordForms {
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: #6B7280;
+.link {
+    font-size: var(--text-support);
+    font-weight: var(--weight-regular);
+    color: var(--color-text-muted);
     text-decoration: none;
 }
 
-.forgotPasswordForms:hover{
+.link:hover{
     text-decoration: underline;
 }
 
-.rememberMe {
+.checkbox {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: #6B7280;
+    font-size: var(--text-support);
+    font-weight: var(--weight-regular);
+    color: var(--color-text-muted);
     cursor: pointer;
 }
 
-.rememberMe input {
-    accent-color: #0F766E;
+.checkbox input {
+    accent-color: var(--color-primary);
 }
 
-.formsError {
+.error {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    font-size: 1.4rem;
-    color: #B91C1C;
+    font-size: var(--text-body);
+    color: var(--color-error);
 }
 
-.errorIcon {
+.error__icon {
     width: 1.6rem;
     height: 1.6rem;
     flex-shrink: 0;
 }
 
-[hidden] {
-    display: none !important;
-}
-
-
-.formsSubmit {
-    height: 4.8rem;
-    width: 100%;
-    border-radius: 0.8rem;
-    font-size: 1.5rem;
-    font-weight: 500;
-    background-color: #0F766E;
-    color: #FFFFFF;
+.btn {
+    height: var(--size-control);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-body);
+    font-weight: var(--weight-medium);
+    background-color: var(--color-primary);
+    color: var(--color-white);
     border: none;
     cursor: pointer;
 }
 
-.formsSubmit:hover {
-    background-color: #115E59;
+.btn--full {
+    width: 100%;
 }
 
-.formsSubmit:active {
-    background-color: #134E4A;
+.btn:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.btn:active {
+    background-color: var(--color-primary-pressed);
+}
+
+/* === 3. LOGIN ===*/
+.login {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.login .logo {
+    color: var(--color-white);
+}
+
+.login__welcome {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-primary-dark);
+}
+
+.login__welcome-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: var(--space-page) 0;
+    height: 100%;
+    width: 100%;
+    max-width: 50.0rem;
+}
+
+.login__welcome-texts {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.login__title {
+    font-size: var(--text-display);
+    font-weight: var(--weight-bold);
+    color: var(--color-white);
+    line-height: 1;
+}
+
+.login__desc {
+    font-size: var(--text-lead);
+    color: var(--color-white);
+    font-weight: var(--weight-regular);
+}
+
+.login__obs {
+    font-size: var(--text-support);
+    color: var(--color-white);
+}
+
+.login__form-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-bg);
+}
+
+.login__form-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 40rem;
+    gap: 2.4rem;
+}
+
+.login__options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2rem;
 }

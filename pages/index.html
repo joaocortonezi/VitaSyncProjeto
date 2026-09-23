@@ -13,55 +13,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main id="loginPage">
-        <section id="welcomeSide">
-            <div id="welcomeAssets">
-                <div id="welcomeLogo">
-                    <h2 class="logo">Vita<strong>Sync</strong></h2>
+    <main class="login">
+        <section class="login__welcome">
+            <div class="login__welcome-box">
+                <p class="logo">Vita<strong>Sync</strong></p>
+
+                <div class="login__welcome-texts">
+                    <h1 class="login__title">A agenda da clínica em um só lugar!</h1>
+                    <p class="login__desc">Clientes, profissionais e procedimentos organizados, com horários sem conflito.</p>
                 </div>
 
-                <div id="welcomeTexts">
-                    <h1 class="welcomeTitle">A agenda da clínica em um só lugar!</h1>
-                    <h2 class="welcomeDesc">Clientes, profissionais e procedimentos organizados, com horários sem conflito.</h2>
-                </div>
-
-                <div id="welcomeObs">
-                    <p class="obs">Sistema de Agendamento · Projeto Interdisciplinar ADS</p>
-                </div>
+                <p class="login__obs">Sistema de Agendamento · Projeto Interdisciplinar ADS</p>
             </div>   
         </section>
 
-        <section id="loginSide">
-            <div id="formsAssets">
-                <div class="formsTexts">
-                    <h3 class="titleInicio">Entrar</h3>
-                    <p class="descInicio">Acesso restrito a usuários cadastrados.</p>
-                </div>    
+        <section class="login__form-side">
+            <div class="login__form-box">
+                <div class="card__header">
+                    <h2 class="card__title">Entrar</h2>
+                    <p class="card__desc">Acesso restrito a usuários cadastrados.</p>
+                </div>
+
                 <form action="#" class="form">
-                    <div class="formGroup">
-                        <label for="email" class="labelForms">E-mail</label>
-                        <input type="email" id="email" class="formsInput" name="email" placeholder="seuemail@email.com" required>
+                    <div class="field">
+                        <label for="email" class="label">E-mail</label>
+                        <input type="email" id="email" class="input" name="email" placeholder="seuemail@email.com" required>
                     </div>
 
-                    <div class="formGroup">
-                        <label for="senha" class="labelForms">Senha</label>
-                        <input type="password" id="senha" class="formsInput" name="senha" placeholder="••••••••" required>
+                    <div class="field">
+                        <label for="senha" class="label">Senha</label>
+                        <input type="password" id="senha" class="input" name="senha" placeholder="••••••••" required>
                     </div>
-                    <div class="optionsGroup">
-                        <label class="rememberMe">
+
+                    <div class="login__options">
+                        <label class="checkbox">
                             <input type="checkbox" name="lembrar"> Lembrar acesso
                         </label>
-                        <a href="#" class="forgotPasswordForms">Esqueceu a senha?</a>
+
+                        <a href="#" class="link">Esqueceu a senha?</a>
                     </div>
-                    <p class="formsError" id="loginError" hidden>
-                        <svg class="errorIcon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    
+                    <p class="error" id="loginError" hidden>
+                        <svg class="error__icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/>
                             <path d="M12 9v4"/>
                             <path d="M12 17h.01"/>
                         </svg>
+
                         E-mail ou senha inválidos
                     </p>
-                    <button type="submit" class="formsSubmit">Entrar</button>
+
+                    <button type="submit" class="btn btn--full">Entrar</button>
                 </form>
             </div>
         </section>

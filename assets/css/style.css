@@ -13,11 +13,14 @@ html {
 
     /* === CORES NEUTRAS === */
     --color-text: #111827; /* TEXTO PRINCIPAL, TEXTO DE INPUT *DIGITADO*, NOME DE CLEINTE */
+    --color-text-strong: #374151; /* TEXTO DE INTERFACE: LINKS DA NAV, OPÇÕES, TEXTO QUE NÃO É PRINCIPAL MAS PRECISA SER LIDO */
     --color-text-muted: #6B7280; /* TEXTO SECUNDÁRIO, LABELS, DESC, LINKS DE APOIO */
     --color-placeholder: #9CA3AF; /* COR DOS TEXTOS DE EXEMPLOS DOS INPUTS */
     --color-border: #D1D5DB; /* BORDAS DE INPUT, BOTÃO NEUTRO, LINHAS DIVISÓRIAS DA AGENDA */
     --color-bg: #F9FAFB; /* FUNDO DA PÁGINA */
     --color-white: #FFFFFF; /* CARDS, CAMPOS, TEXTO SOBRE FUNDOS ESCUROS */
+    --color-surface: #F3F4F6; /* FUNDO DE CABEÇALHOS DA AGENDA, ELEMENTOS DESABILITADOS, AGENDAMENTO CANCELADO */
+
 
     /* === CORES SEMÂNTICAS === */
     --color-error: #B91C1C; /* TEXTO DE ERRO */
@@ -44,7 +47,7 @@ html {
     --radius-md: 1.2rem; /* CURVATURA DAS BORDAS DE CARDS COMO NOVO CLIENTE */
     --radius-lg: 1.6rem; /* CURVATURA DAS BORDAS DE MODAL (JANELAS QUE ABRE POR CIMA DA TELA, CONHECIDO COMO POP-UPS) */
     --space-page: 8rem; /* PADDING VERTICAL (APLICAR EM PADDING-TOP E PADDING-BOTTOM) DE PÁGINAS INTEIRAS, GERALMENTE NÃO TEM BARRAS DE NAVEGAÇÃO */
-    --space-section: 3.2rem: /* PADDING VERTICAL (APLICAR EM PADDING-TOP E PADDING-BOTTOM) DE PÁGINAS COM NAVBAR NO TOP, É A DISTÂNCIA MINIMA DOS CONTÉUDOS DA NAV */
+    --space-section: 3.2rem; /* PADDING VERTICAL (APLICAR EM PADDING-TOP E PADDING-BOTTOM) DE PÁGINAS COM NAVBAR NO TOP, É A DISTÂNCIA MINIMA DOS CONTÉUDOS DA NAV */
 
     /* === PESOS === */
     /* === TOMANDO COMO REFÊRENCIA O FIGMA, CONVERTEREMOS OS PESOS DE REGULAR, MEDIUM, BOLD... PARA OS SEGUINTES PESOS EM NÚMERO === */ 
@@ -52,7 +55,6 @@ html {
     --weight-medium: 500;
     --weight-semibold: 600;
     --weight-bold: 700;
-
 }
 
 * {
@@ -63,6 +65,7 @@ html {
 
 body {
     font-family: "Inter", sans-serif;
+    background-color: var(--color-bg);
 }
 
 /* USADO PARA FORÇAR CONTROLS A HERDAR A FONTE DEFINIDA EM BODY */
@@ -173,6 +176,7 @@ input, button, select, textarea {
 
 .btn {
     height: var(--size-control);
+    padding: 0 2.4rem;
     border-radius: var(--radius-sm);
     font-size: var(--text-body);
     font-weight: var(--weight-medium);
@@ -186,6 +190,11 @@ input, button, select, textarea {
     width: 100%;
 }
 
+.btn--sm {
+    height: 3.6rem;
+    padding: 0 2.0rem;
+}
+
 .btn:hover {
     background-color: var(--color-primary-dark);
 }
@@ -194,81 +203,55 @@ input, button, select, textarea {
     background-color: var(--color-primary-pressed);
 }
 
-/* === 3. LOGIN ===*/
-.login {
+.nav {
     display: flex;
-    width: 100%;
-    height: 100vh;
-}
-
-.login .logo {
-    color: var(--color-white);
-}
-
-.login__welcome {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    background-color: var(--color-primary-dark);
-}
-
-.login__welcome-box {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     justify-content: space-between;
-    padding: var(--space-page) 0;
-    height: 100%;
-    width: 100%;
-    max-width: 50.0rem;
+    padding: 0 2.4rem;
+    height: 6.2rem;
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
 }
 
-.login__welcome-texts {
+.nav__left {
     display: flex;
-    flex-direction: column;
-    gap: 1.6rem;
+    align-items: center;
+    gap: 3.2rem;
 }
 
-.login__title {
-    font-size: var(--text-display);
-    font-weight: var(--weight-bold);
-    color: var(--color-white);
+.nav .logo {
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--color-primary-dark);
+}
+
+.nav__links {
+    position: relative;
+    top: 1px;
+    display: flex;
+    gap: 2.4rem;
+    list-style-type: none;
     line-height: 1;
 }
 
-.login__desc {
-    font-size: var(--text-lead);
-    color: var(--color-white);
+.nav__link {
+    font-size: var(--text-body);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-strong);
+    text-decoration: none;
+}
+
+.nav__link:hover {
+    color: var(--color-text);
+}
+
+.nav__link--active {
+    color: var(--color-primary);
+    font-weight: var(--weight-semibold);
+}
+
+.nav__user {
+    font-size: var(--text-body);
     font-weight: var(--weight-regular);
-}
-
-.login__obs {
-    font-size: var(--text-support);
-    color: var(--color-white);
-}
-
-.login__form-side {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--color-bg);
-}
-
-.login__form-box {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 40rem;
-    gap: 2.4rem;
-}
-
-.login__options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.2rem;
+    color: var(--color-text-strong);
 }

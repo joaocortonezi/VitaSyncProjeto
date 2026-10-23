@@ -135,6 +135,24 @@ input, button, select, textarea {
     font-weight: var(--weight-regular);
 }
 
+.input:focus-visible {
+    outline: 1px solid var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.input:user-invalid {
+    border-color: var(--color-error-strong);
+}
+
+fieldset.field {
+    border: none;
+    min-width: 0;
+}
+
+fieldset.field > legend {
+    margin-bottom: 0.4rem;
+}
+
 .link {
     font-size: var(--text-support);
     font-weight: var(--weight-regular);
@@ -174,6 +192,19 @@ input, button, select, textarea {
     flex-shrink: 0;
 }
 
+.alert {
+    padding: 1.2rem 1.6rem;
+    border: 1px solid;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-body);
+}
+
+.alert--error {
+    border-color: var(--color-error-strong);
+    background-color: var(--color-error-bg);
+    color: var(--color-error);
+}
+
 .btn {
     height: var(--size-control);
     padding: 0 2.4rem;
@@ -201,6 +232,35 @@ input, button, select, textarea {
 
 .btn:active {
     background-color: var(--color-primary-pressed);
+}
+
+.btn--secondary {
+    background-color: var(--color-white);
+    color: var(--color-text-strong);
+    border: 1px solid var(--color-border);
+}
+
+.btn--secondary:hover {
+    background-color: var(--color-surface);
+}
+
+.btn--secondary:active {
+    background-color: var(--color-border);
+}
+
+.btn--danger {
+    background-color: var(--color-error-strong);
+}
+
+.btn--danger:hover,
+.btn--danger:active {
+    background-color: var(--color-error);
+}
+
+.btn:disabled {
+    background-color: var(--color-placeholder);
+    color: var(--color-white);
+    cursor: not-allowed;
 }
 
 .nav {
@@ -254,4 +314,57 @@ input, button, select, textarea {
     font-size: var(--text-body);
     font-weight: var(--weight-regular);
     color: var(--color-text-strong);
+}
+
+.nav__right {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+}
+
+.nav__logout {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: var(--text-body);
+    font-weight: var(--weight-medium);
+    color: var(--color-primary);
+    cursor: pointer;
+}
+
+.nav__logout:hover {
+    text-decoration: underline;
+}
+
+.modal {
+    width: min(64rem, calc(100% - 3.2rem));
+    margin: auto; /* CENTRALIZA O MODAL, O RESET DO * ZERA A MARGEM PADRÃO */
+    padding: 3.2rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-white);
+    color: var(--color-text);
+}
+
+.modal::backdrop {
+    background-color: rgb(17 24 39 / 0.4); /* MESMO TOM DE --color-text, COM 40% DE OPACIDADE */
+}
+
+.modal__title {
+    margin-bottom: 2.4rem;
+    font-size: var(--text-h2);
+    font-weight: var(--weight-semibold);
+}
+
+.modal__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.6rem;
+}
+
+.modal__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.6rem;
+    margin-top: 0.8rem;
 }

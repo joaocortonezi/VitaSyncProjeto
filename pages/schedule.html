@@ -9,25 +9,29 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/schedule.css">
     <script src="../assets/js/scripts.js" defer></script>
+    <script src="../assets/js/schedule.js" defer></script>
     <title>VitaSync - Agenda</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="nav">
-        <div class="nav__left">
-            <p class="logo">Vita<strong>Sync</strong></p>
+<nav class="nav">
+    <div class="nav__left">
+        <p class="logo">Vita<strong>Sync</strong></p>
 
-            <ul class="nav__links">
-                <li><a href="#" class="nav__link nav__link--active">Agenda</a></li>
-                <li><a href="#" class="nav__link">Clientes</a></li>
-                <li><a href="#" class="nav__link">Profissionais</a></li>
-                <li><a href="#" class="nav__link">Procedimentos</a></li>
-            </ul>
-        </div>
+        <ul class="nav__links">
+            <li><a href="schedule.html" class="nav__link nav__link--active">Agenda</a></li>
+            <li><a href="clients.html" class="nav__link">Clientes</a></li>
+            <li><a href="#" class="nav__link">Profissionais</a></li>
+            <li><a href="#" class="nav__link">Procedimentos</a></li>
+        </ul>
+    </div>
 
+    <div class="nav__right">
         <p class="nav__user">Olá, Recepção</p>
-    </nav>
+        <button type="button" class="nav__logout" id="sairBtn">Sair</button>
+    </div>
+</nav>
     <main class="schedule">
         <div class="schedule__controls">
             <div class="schedule__controls-left">
@@ -37,36 +41,25 @@
                 </div>
 
                 <div class="date-nav">
-                    <button type="button" class="date-nav__arrow" aria-label="Dia anterior">
+                    <button type="button" class="date-nav__arrow" id="diaAnterior" aria-label="Dia anterior">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left preview-icon"><path d="m15 18-6-6 6-6"/></svg>
                     </button>
 
-                    <h1 class="date-nav__current">Segunda, 21/09</h1>
+                    <h1 class="date-nav__current" id="tituloData">Segunda, 21/09</h1>
 
-                    <button type="button" class="date-nav__arrow" aria-label="Dia seguinte">
+                    <button type="button" class="date-nav__arrow" id="diaSeguinte" aria-label="Dia seguinte">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right preview-icon"><path d="m9 18 6-6-6-6"/></svg>
                     </button>
                 </div>
             </div>
 
-            <button class="btn btn--sm" type="button">+ Agendamento</button>
+            <button class="btn btn--sm" type="button" id="btnNovoAgendamento" commandfor="modalAgendamento" command="show-modal">+ Agendamento</button>
         </div>
 
         <div class="schedule__board">
             <div class="schedule__corner"></div>
 
-            <div class="schedule__professionals">
-                <div class="schedule__professional">
-                    <p>Dra. Paula</p>
-                </div>
-                
-                <div class="schedule__professional">
-                    <p>Dr. Marcos</p>
-                </div>
-
-                <div class="schedule__professional">
-                    <p>Est. Carla</p>
-                </div>
+            <div class="schedule__professionals" id="profissionaisCabecalho">
             </div>
 
             <div class="schedule__hours">
@@ -83,12 +76,104 @@
                 <time class="schedule__hour">17:00</time>
             </div>
 
-            <div class="schedule__columns">
-                <div class="schedule__column" data-professional="1"></div>
-                <div class="schedule__column" data-professional="2"></div>
-                <div class="schedule__column" data-professional="3"></div>
+            <div class="schedule__columns" id="profissionaisColunas">
             </div>
         </div>
     </main>
+    <dialog class="modal" id="modalAgendamento" aria-labelledby="modalAgendamentoTitulo">
+    <h2 class="modal__title" id="modalAgendamentoTitulo">Novo agendamento</h2>
+
+    <form method="dialog" class="form" id="formAgendamento">
+        <div class="modal__row">
+            <div class="field">
+                <label for="cliente" class="label">Cliente <span aria-hidden="true">*</span></label>
+                <select id="cliente" class="input" name="cliente" required>
+                    <option value="" disabled selected>Selecione um cliente</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="profissional" class="label">Profissional <span aria-hidden="true">*</span></label>
+                <select id="profissional" class="input" name="profissional" required>
+                    <option value="" disabled selected>Selecione um profissional</option>
+                </select>
+            </div>
+        </div>
+
+        <fieldset class="field">
+            <legend class="label">Procedimentos <span aria-hidden="true">*</span></legend>
+
+            <div class="modal__procedures" id="procedimentosLista">
+            </div>
+        </fieldset>
+
+        <div class="modal__row">
+            <div class="field">
+                <label for="data" class="label">Data <span aria-hidden="true">*</span></label>
+                <input type="date" id="data" class="input" name="data" required>
+            </div>
+
+            <div class="field">
+                <label for="hora" class="label">Horário <span aria-hidden="true">*</span></label>
+                <input type="time" id="hora" class="input" name="hora" min="07:00" max="18:00" required>
+            </div>
+        </div>
+
+        <p class="modal__summary" aria-live="polite">
+            Duração total: <strong id="resumoDuracao">0h00</strong>
+            <span id="resumoIntervalo"></span>
+            · Valor: <strong id="resumoValor">R$ 0</strong>
+        </p>
+
+        <p class="alert alert--error" id="alertaConflito" role="alert" hidden>
+            <strong>⚠ Conflito de horário:</strong>
+            <span id="alertaConflitoTexto"></span>
+        </p>
+
+        <div class="modal__actions">
+            <button type="button" class="btn btn--secondary" commandfor="modalAgendamento" command="close">Cancelar</button>
+            <button type="submit" class="btn" id="btnConfirmar">Confirmar</button>
+        </div>
+    </form>
+</dialog>
+<dialog class="modal" id="modalDetalhes" aria-labelledby="modalDetalhesTitulo">
+    <h2 class="modal__title" id="modalDetalhesTitulo">Detalhes do agendamento</h2>
+
+    <dl class="modal__details">
+        <div><dt>Cliente</dt><dd id="detalheCliente"></dd></div>
+        <div><dt>Telefone</dt><dd id="detalheTelefone"></dd></div>
+        <div><dt>Profissional</dt><dd id="detalheProfissional"></dd></div>
+        <div><dt>Data</dt><dd id="detalheData"></dd></div>
+        <div><dt>Horário</dt><dd id="detalheHorario"></dd></div>
+        <div><dt>Valor</dt><dd id="detalheValor"></dd></div>
+        <div><dt>Procedimentos</dt><dd id="detalheProcedimentos"></dd></div>
+        <div><dt>Status</dt><dd id="detalheStatus"></dd></div>
+    </dl>
+
+    <div class="modal__actions">
+        <button type="button" class="btn btn--secondary" commandfor="modalDetalhes" command="close">Fechar</button>
+        <button type="button" class="btn btn--danger" id="btnCancelarAgendamento">Cancelar agendamento</button>
+    </div>
+</dialog>
+
+<template id="procedimentoTemplate">
+    <div class="modal__procedure">
+        <label class="checkbox">
+            <input type="checkbox" name="procedimento">
+            <span class="modal__procedure-text"></span>
+        </label>
+        <label class="modal__qty">
+            · qtd:
+            <input type="number" class="modal__qty-input" min="1" value="1">
+        </label>
+    </div>
+</template>
+
+<template id="agendamentoTemplate">
+    <button type="button" class="schedule__appointment">
+        <strong class="schedule__appointment-client"></strong>
+        <span class="schedule__appointment-time"></span>
+    </button>
+</template>
 </body>
 </html>

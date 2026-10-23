@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/clients.css">
+    <script src="../assets/js/scripts.js" defer></script>
+    <script src="../assets/js/clients.js" defer></script>
+    <title>VitaSync - Clientes</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav__left">
+            <p class="logo">Vita<strong>Sync</strong></p>
+
+            <ul class="nav__links">
+                <li><a href="schedule.html" class="nav__link">Agenda</a></li>
+                <li><a href="clients.html" class="nav__link nav__link--active">Clientes</a></li>
+                <li><a href="#" class="nav__link">Profissionais</a></li>
+                <li><a href="#" class="nav__link">Procedimentos</a></li>
+            </ul>
+        </div>
+
+        <div class="nav__right">
+            <p class="nav__user">Olá, Recepção</p>
+            <button type="button" class="nav__logout" id="sairBtn">Sair</button>
+        </div>
+    </nav>
+    <main class="clients">
+        <section class="clients__list">
+            <div class="card__header">
+                <h1 class="card__title">Clientes</h1>
+                <p class="card__desc">Clientes cadastrados na clínica</p>
+            </div>
+
+            <input type="search" id="busca" class="input" name="busca" placeholder="Buscar por nome ou CPF" aria-label="Buscar cliente">
+
+            <table class="clients__table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Telefone</th>
+                    </tr>
+                </thead>
+                <tbody id="clientesTabela">
+                </tbody>
+            </table>
+        </section>
+
+        <section class="clients__form">
+            <div class="card__header">
+                <h2 class="card__title">Novo cliente</h2>
+                <p class="card__desc">Preencha os dados para cadastrar</p>
+            </div>
+
+            <form action="#" class="form" id="clienteForm">
+                <div class="field">
+                    <label for="nome" class="label">Nome completo <span aria-hidden="true">*</span></label>
+                    <input type="text" id="nome" class="input" name="nome" placeholder="Ex.: Maria da Silva" required>
+                </div>
+
+                <div class="clients__row">
+                    <div class="field">
+                        <label for="cpf" class="label">CPF <span aria-hidden="true">*</span></label>
+                        <input type="text" id="cpf" class="input" name="cpf" placeholder="000.000.000-00" inputmode="numeric" maxlength="14" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="telefone" class="label">Telefone / WhatsApp <span aria-hidden="true">*</span></label>
+                        <input type="tel" id="telefone" class="input" name="telefone" placeholder="(66) 9 0000-0000" required>
+                    </div>
+                </div>
+
+                <p class="error" id="cpfError" hidden>
+                    <svg class="error__icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/>
+                        <path d="M12 9v4"/>
+                        <path d="M12 17h.01"/>
+                    </svg>
+                    CPF já cadastrado
+                </p>
+
+                <div class="clients__actions">
+                    <button type="reset" class="btn btn--secondary">Cancelar</button>
+                    <button type="submit" class="btn">Salvar cliente</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

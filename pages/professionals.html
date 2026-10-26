@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/professionals.css">
+    <script src="../assets/js/scripts.js" defer></script>
+    <script src="../assets/js/professionals.js" defer></script>
+    <title>VitaSync - Profissionais</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav__left">
+            <p class="logo">Vita<strong>Sync</strong></p>
+
+            <ul class="nav__links">
+                <li><a href="schedule.html" class="nav__link">Agenda</a></li>
+                <li><a href="clients.html" class="nav__link">Clientes</a></li>
+                <li><a href="professionals.html" class="nav__link nav__link--active">Profissionais</a></li>
+                <li><a href="procedures.html" class="nav__link">Procedimentos</a></li>
+            </ul>
+        </div>
+
+        <div class="nav__right">
+            <p class="nav__user">Olá, Recepção</p>
+            <button type="button" class="nav__logout" id="sairBtn">Sair</button>
+        </div>
+    </nav>
+    <main class="professionals">
+        <section class="professionals__form">
+            <div class="card__header">
+                <h1 class="card__title">Novo profissional</h1>
+                <p class="card__desc">Preencha os dados para cadastrar</p>
+            </div>
+
+            <form action="#" class="form" id="profissionalForm">
+                <div class="field">
+                    <label for="nome" class="label">Nome completo <span aria-hidden="true">*</span></label>
+                    <input type="text" id="nome" class="input" name="nome" placeholder="Ex.: Dra. Paula Ribeiro" required>
+                </div>
+
+                <div class="professionals__row">
+                    <div class="field">
+                        <label for="cpf" class="label">CPF <span aria-hidden="true">*</span></label>
+                        <input type="text" id="cpf" class="input" name="cpf" placeholder="000.000.000-00" inputmode="numeric" maxlength="14" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="telefone" class="label">Telefone <span aria-hidden="true">*</span></label>
+                        <input type="tel" id="telefone" class="input" name="telefone" placeholder="(66) 9 0000-0000" required>
+                    </div>
+                </div>
+
+                <p class="error" id="cpfError" hidden>
+                    <svg class="error__icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/>
+                        <path d="M12 9v4"/>
+                        <path d="M12 17h.01"/>
+                    </svg>
+                    CPF já cadastrado
+                </p>
+
+                <div class="professionals__row professionals__row--three">
+                    <div class="field">
+                        <label for="tipoRegistro" class="label">Tipo de registro <span aria-hidden="true">*</span></label>
+                        <select id="tipoRegistro" class="input" name="tipoRegistro" required>
+                            <option value="CRM" selected>CRM</option>
+                            <option value="COREN">COREN</option>
+                            <option value="CREFITO">CREFITO</option>
+                            <option value="CRBM">CRBM</option>
+                            <option value="CRO">CRO</option>
+                            <option value="CRF">CRF</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="numeroRegistro" class="label">Número do registro <span aria-hidden="true">*</span></label>
+                        <input type="text" id="numeroRegistro" class="input" name="numeroRegistro" placeholder="Ex.: 12345/MT" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="especialidade" class="label">Especialidade</label>
+                        <input type="text" id="especialidade" class="input" name="especialidade" placeholder="Ex.: Dermatologia">
+                    </div>
+                </div>
+
+                <fieldset class="field">
+                    <legend class="label">Procedimentos que realiza <span aria-hidden="true">*</span> (marque um ou mais)</legend>
+
+                    <div class="professionals__procedures" id="procedimentosLista">
+                    </div>
+                </fieldset>
+
+                <p class="alert alert--success" id="salvoAviso" role="status" hidden>Profissional cadastrado com sucesso.</p>
+
+                <div class="professionals__actions">
+                    <button type="reset" class="btn btn--secondary">Cancelar</button>
+                    <button type="submit" class="btn">Salvar profissional</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <template id="procedimentoTemplate">
+        <label class="checkbox">
+            <input type="checkbox" name="procedimento">
+            <span class="professionals__procedure-text"></span>
+        </label>
+    </template>
+</body>
+</html>

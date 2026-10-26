@@ -1,0 +1,82 @@
+/* === 5. PROFISSIONAIS === */
+body {
+    color: var(--color-text);
+}
+
+.professionals {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-section);
+}
+
+.professionals__form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    width: 100%;
+    max-width: 80rem;
+    padding: 3.2rem;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.professionals__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.6rem;
+}
+
+.professionals__row--three {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.professionals__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.6rem;
+}
+
+/* CHECKBOXES EM 2 COLUNAS, PREENCHENDO DE CIMA PARA BAIXO E DEPOIS PARA A DIREITA */
+.professionals__procedures {
+    column-count: 2;
+    column-gap: 1.6rem;
+    padding: 1.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+}
+
+.professionals__procedures .checkbox {
+    break-inside: avoid;
+    padding: 0.6rem 0;
+    font-size: var(--text-body);
+}
+
+.professionals__procedures .checkbox:has(input:checked) {
+    color: var(--color-text);
+}
+
+.professionals__procedures .checkbox input {
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.professionals__empty {
+    font-size: var(--text-body);
+    color: var(--color-text-muted);
+}
+
+.professionals__empty a {
+    color: var(--color-primary);
+}
+
+@media (max-width: 640px) {
+    .professionals__row,
+    .professionals__row--three {
+        grid-template-columns: 1fr;
+    }
+
+    .professionals__procedures {
+        column-count: 1;
+    }
+}

@@ -41,6 +41,15 @@ const detalheProcedimentos = document.querySelector('#detalheProcedimentos');
 const detalheStatus = document.querySelector('#detalheStatus');
 const btnCancelarAgendamento = document.querySelector('#btnCancelarAgendamento');
 
+/* MODAL DE CANCELAMENTO */
+const modalCancelar = document.querySelector('#modalCancelar');
+const formCancelamento = document.querySelector('#formCancelamento');
+const cancelarCliente = document.querySelector('#cancelarCliente');
+const cancelarProfissional = document.querySelector('#cancelarProfissional');
+const cancelarProcedimentos = document.querySelector('#cancelarProcedimentos');
+const cancelarQuando = document.querySelector('#cancelarQuando');
+const motivoInput = document.querySelector('#motivo');
+
 let diaAtual = new Date();
 diaAtual.setHours(0, 0, 0, 0);
 
@@ -78,6 +87,11 @@ function paraDataISO(data) {
 function deDataISO(texto) {
     const [ano, mes, dia] = texto.split('-').map(Number);
     return new Date(ano, mes - 1, dia);
+}
+
+/* 2026-09-22 -> 22/09/2026 */
+function formatarDataBR(dataISO) {
+    return dataISO.split('-').reverse().join('/');
 }
 
 function buscarPorId(chave, id) {
@@ -286,24 +300,63 @@ function abrirDetalhes(agendamento) {
         .join(', ');
     detalheStatus.textContent = agendamento.status === 'cancelado' ? 'Cancelado' : 'Agendado';
 
+ /* O MOTIVO SÓ APARECE EM AGENDAMENTO CANCELADO QUE TENHA MOTIVO PREENCHIDO */
+    detalheMotivoLinha.hidden = !agendamento.motivoCancelamento;
+    detalheMotivo.textContent = agendamento.motivoCancelamento || '';
+
     btnCancelarAgendamento.hidden = agendamento.status === 'cancelado';
     agendamentoAbertoId = agendamento.id;
     modalDetalhes.showModal();
 }
 
-btnCancelarAgendamento.addEventListener('click', () => {
-    if (!confirm('Cancelar este agendamento?')) return;
+/* === 5. MODAL DE CANCELAMENTO === */
+/* "Limpeza de pele + Peeling". A QTD SÓ APARECE QUANDO É MAIOR QUE 1 */
+function resumirProcedimentos(agendamento) {
+    const procedimentos = lerDados('procedimentos');
 
+    return agendamento.procedimentos
+        .map(item => {
+            const procedimento = procedimentos.find(p => p.id === item.id);
+            const nome = procedimento ? procedimento.nome : 'Procedimento removido';
+            return item.qtd > 1 ? `${nome} (x${item.qtd})` : nome;
+        })
+        .join(' + ');
+}
+
+/* TROCA O MODAL DE DETALHES PELO DE CONFIRMAÇÃO, JÁ COM O RESUMO DO AGENDAMENTO */
+function abrirCancelamento() {
+    const agendamento = buscarPorId('agendamentos', agendamentoAbertoId);
+    const cliente = buscarPorId('clientes', agendamento.clienteId);
+    const profissional = buscarPorId('profissionais', agendamento.profissionalId);
+    const fim = paraHorario(paraMinutos(agendamento.hora) + agendamento.duracao);
+    const diaSemana = DIAS_ABREVIADOS[deDataISO(agendamento.data).getDay()];
+
+    cancelarCliente.textContent = cliente ? cliente.nome : 'Cliente removido';
+    cancelarProfissional.textContent = profissional ? profissional.nome : 'Profissional removido';
+    cancelarProcedimentos.textContent = `${resumirProcedimentos(agendamento)} · ${formatarDuracao(agendamento.duracao)}`;
+    cancelarQuando.textContent =
+        `${diaSemana}, ${formatarDataBR(agendamento.data)} · ${agendamento.hora} às ${fim} · ${formatarValor(agendamento.valor)}`;
+
+    formCancelamento.reset(); /* LIMPA O MOTIVO DE UM CANCELAMENTO ANTERIOR */
+    modalDetalhes.close();
+    modalCancelar.showModal();
+}
+
+/* O method="dialog" FECHA O MODAL DEPOIS DESTE SUBMIT */
+formCancelamento.addEventListener('submit', () => {
     const agendamentos = lerDados('agendamentos');
     const agendamento = agendamentos.find(item => item.id === agendamentoAbertoId);
+
     agendamento.status = 'cancelado';
+    agendamento.motivoCancelamento = motivoInput.value.trim();
 
     salvarDados('agendamentos', agendamentos);
-    modalDetalhes.close();
-    renderizarAgenda();
+    renderizarAgenda(); /* O BLOCO FICA RISCADO E O HORÁRIO LIBERA PARA NOVOS AGENDAMENTOS */
 });
 
-/* === 5. INÍCIO === */
+btnCancelarAgendamento.addEventListener('click', abrirCancelamento);
+
+/* === 6. INÍCIO === */
 diaAnterior.addEventListener('click', () => mudarDia(-1));
 diaSeguinte.addEventListener('click', () => mudarDia(1));
 btnNovoAgendamento.addEventListener('click', limparFormulario);

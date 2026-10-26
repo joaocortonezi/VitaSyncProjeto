@@ -144,6 +144,14 @@ input, button, select, textarea {
     border-color: var(--color-error-strong);
 }
 
+/* TEXTAREA: NÃO USA A ALTURA FIXA DOS CONTROLS, CRESCE CONFORME O CONTEÚDO */
+.input--textarea {
+    height: auto;
+    min-height: 9.6rem;
+    padding: 1.2rem;
+    resize: vertical;
+}
+
 fieldset.field {
     border: none;
     min-width: 0;
@@ -203,6 +211,12 @@ fieldset.field > legend {
     border-color: var(--color-error-strong);
     background-color: var(--color-error-bg);
     color: var(--color-error);
+}
+
+.alert--success {
+    border-color: var(--color-success);
+    background-color: var(--color-success-bg);
+    color: var(--color-success);
 }
 
 .btn {
@@ -354,6 +368,10 @@ fieldset.field > legend {
     margin-bottom: 2.4rem;
     font-size: var(--text-h2);
     font-weight: var(--weight-semibold);
+}
+
+.modal__header {
+    margin-bottom: 2.4rem;
 }
 
 .modal__row {

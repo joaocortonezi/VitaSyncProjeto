@@ -27,7 +27,35 @@ function exigirLogin() {
     }
 }
 
-/* === 3. DADOS INICIAIS === */
+/* === 3. MÁSCARAS E FORMATAÇÃO === */
+/* USADAS EM CLIENTES E PROFISSIONAIS */
+/* DEIXA SÓ OS NÚMEROS E VAI COLOCANDO OS PONTOS E O TRAÇO: 000.000.000-00 */
+function mascaraCpf(valor) {
+    return valor
+        .replace(/\D/g, '')
+        .slice(0, 11)
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+}
+
+/* MESMA IDEIA PARA CELULAR: (66) 9 0000-0000 */
+function mascaraTelefone(valor) {
+    return valor
+        .replace(/\D/g, '')
+        .slice(0, 11)
+        .replace(/^(\d{2})(\d)/, '($1) $2')
+        .replace(/\) (\d)(\d)/, ') $1 $2')
+        .replace(/(\d{4})(\d{1,4})$/, '$1-$2');
+}
+
+/* R$ 120 PARA VALOR INTEIRO E R$ 120,50 QUANDO TEM CENTAVOS */
+function formatarValor(valor) {
+    const casas = Number.isInteger(valor) ? 0 : 2;
+    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: casas, maximumFractionDigits: casas });
+}
+
+/* === 4. DADOS INICIAIS === */
 /* EXEMPLOS PARA TESTAR A AGENDA ENQUANTO AS PÁGINAS DE PROFISSIONAIS E PROCEDIMENTOS NÃO FICAM PRONTAS. SÓ SALVA SE A CHAVE AINDA NÃO EXISTIR */
 if (!localStorage.getItem('profissionais')) {
     salvarDados('profissionais', [

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/procedures.css">
+    <script src="../assets/js/scripts.js" defer></script>
+    <script src="../assets/js/procedures.js" defer></script>
+    <title>VitaSync - Procedimentos</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav__left">
+            <p class="logo">Vita<strong>Sync</strong></p>
+
+            <ul class="nav__links">
+                <li><a href="schedule.html" class="nav__link">Agenda</a></li>
+                <li><a href="clients.html" class="nav__link">Clientes</a></li>
+                <li><a href="professionals.html" class="nav__link">Profissionais</a></li>
+                <li><a href="procedures.html" class="nav__link nav__link--active">Procedimentos</a></li>
+            </ul>
+        </div>
+
+        <div class="nav__right">
+            <p class="nav__user">Olá, Recepção</p>
+            <button type="button" class="nav__logout" id="sairBtn">Sair</button>
+        </div>
+    </nav>
+    <main class="procedures">
+        <section class="procedures__form">
+            <div class="card__header">
+                <h1 class="card__title">Novo procedimento</h1>
+                <p class="card__desc">Preencha os dados para cadastrar</p>
+            </div>
+
+            <form action="#" class="form" id="procedimentoForm">
+                <div class="field">
+                    <label for="nome" class="label">Nome <span aria-hidden="true">*</span></label>
+                    <input type="text" id="nome" class="input" name="nome" placeholder="Ex.: Limpeza de pele" required>
+                </div>
+
+                <p class="error" id="nomeError" hidden>
+                    <svg class="error__icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/>
+                        <path d="M12 9v4"/>
+                        <path d="M12 17h.01"/>
+                    </svg>
+                    Procedimento já cadastrado
+                </p>
+
+                <div class="procedures__row">
+                    <div class="field">
+                        <label for="duracao" class="label">Duração (minutos) <span aria-hidden="true">*</span></label>
+                        <input type="number" id="duracao" class="input" name="duracao" placeholder="60" min="5" max="660" step="5" inputmode="numeric" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="preco" class="label">Preço (R$) <span aria-hidden="true">*</span></label>
+                        <input type="text" id="preco" class="input" name="preco" placeholder="120,00" inputmode="decimal" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="descricao" class="label">Descrição (opcional)</label>
+                    <textarea id="descricao" class="input input--textarea" name="descricao" placeholder="Ex.: Inclui extração e máscara calmante"></textarea>
+                </div>
+
+                <p class="procedures__hint">
+                    <svg class="procedures__hint-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4"/>
+                        <path d="M12 8h.01"/>
+                    </svg>
+                    A duração define o tamanho do bloco na agenda e a checagem de conflito.
+                </p>
+
+                <div class="procedures__actions">
+                    <button type="reset" class="btn btn--secondary">Cancelar</button>
+                    <button type="submit" class="btn">Salvar procedimento</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="procedures__list">
+            <h2 class="procedures__list-title">Procedimentos cadastrados</h2>
+
+            <ul class="procedures__items" id="procedimentosLista">
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

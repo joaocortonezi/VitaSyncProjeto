@@ -1,0 +1,101 @@
+/* === 6. PROCEDIMENTOS === */
+body {
+    color: var(--color-text);
+}
+
+.procedures {
+    display: flex;
+    align-items: flex-start;
+    gap: 2.4rem;
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: var(--space-section);
+}
+
+.procedures__form,
+.procedures__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    padding: 3.2rem;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.procedures__form {
+    flex: 1.15;
+}
+
+.procedures__list {
+    flex: 1;
+    gap: 1.6rem;
+}
+
+.procedures__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.6rem;
+}
+
+.procedures__hint {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: var(--text-support);
+    font-style: italic;
+    color: var(--color-text-muted);
+}
+
+.procedures__hint-icon {
+    width: 1.4rem;
+    height: 1.4rem;
+    flex-shrink: 0;
+}
+
+.procedures__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.6rem;
+}
+
+.procedures__list-title {
+    font-size: var(--text-h3);
+    font-weight: var(--weight-semibold);
+}
+
+.procedures__items {
+    list-style-type: none;
+}
+
+.procedures__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.6rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--text-body);
+}
+
+.procedures__item:last-child {
+    border-bottom: none;
+}
+
+.procedures__item-info {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+}
+
+.procedures__empty {
+    padding: 1.2rem 0;
+    font-size: var(--text-body);
+    color: var(--color-text-muted);
+}
+
+@media (max-width: 900px) {
+    .procedures {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

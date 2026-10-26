@@ -4,6 +4,7 @@ exigirLogin();
 const INICIO_EXPEDIENTE = 7 * 60; /* 07:00 EM MINUTOS */
 const FIM_EXPEDIENTE = 18 * 60; /* 18:00 EM MINUTOS */
 const DIAS_SEMANA = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+const DIAS_ABREVIADOS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 
 /* GRADE */
 const tituloData = document.querySelector('#tituloData');
@@ -39,6 +40,8 @@ const detalheHorario = document.querySelector('#detalheHorario');
 const detalheValor = document.querySelector('#detalheValor');
 const detalheProcedimentos = document.querySelector('#detalheProcedimentos');
 const detalheStatus = document.querySelector('#detalheStatus');
+const detalheMotivoLinha = document.querySelector('#detalheMotivoLinha');
+const detalheMotivo = document.querySelector('#detalheMotivo');
 const btnCancelarAgendamento = document.querySelector('#btnCancelarAgendamento');
 
 /* MODAL DE CANCELAMENTO */
@@ -68,10 +71,9 @@ function paraHorario(minutos) {
     return `${h}:${m}`;
 }
 
-function formatarDuracao(minutos) {
-    return `${Math.floor(minutos / 60)}h${String(minutos % 60).padStart(2, '0')}`;
+function formatarValor(valor) {
+    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0 });
 }
-
 function formatarValor(valor) {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0 });
 }
@@ -300,7 +302,7 @@ function abrirDetalhes(agendamento) {
         .join(', ');
     detalheStatus.textContent = agendamento.status === 'cancelado' ? 'Cancelado' : 'Agendado';
 
- /* O MOTIVO SÓ APARECE EM AGENDAMENTO CANCELADO QUE TENHA MOTIVO PREENCHIDO */
+          /* O MOTIVO SÓ APARECE EM AGENDAMENTO CANCELADO QUE TENHA MOTIVO PREENCHIDO */
     detalheMotivoLinha.hidden = !agendamento.motivoCancelamento;
     detalheMotivo.textContent = agendamento.motivoCancelamento || '';
 

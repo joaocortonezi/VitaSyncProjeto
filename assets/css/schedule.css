@@ -214,6 +214,13 @@ body {
     text-decoration: line-through;
 }
 
+/* MODAL DE CANCELAMENTO */
+.modal__summary--stacked {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
 /* MODAL DE DETALHES */
 .modal__details {
     display: grid;

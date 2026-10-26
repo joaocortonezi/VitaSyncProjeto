@@ -22,8 +22,8 @@
         <ul class="nav__links">
             <li><a href="schedule.html" class="nav__link nav__link--active">Agenda</a></li>
             <li><a href="clients.html" class="nav__link">Clientes</a></li>
-            <li><a href="#" class="nav__link">Profissionais</a></li>
-            <li><a href="#" class="nav__link">Procedimentos</a></li>
+             <li><a href="professionals.html" class="nav__link">Profissionais</a></li>
+            <li><a href="procedures.html" class="nav__link">Procedimentos</a></li>
         </ul>
     </div>
 
@@ -148,12 +148,39 @@
         <div><dt>Valor</dt><dd id="detalheValor"></dd></div>
         <div><dt>Procedimentos</dt><dd id="detalheProcedimentos"></dd></div>
         <div><dt>Status</dt><dd id="detalheStatus"></dd></div>
+        <div><dt>Status</dt><dd id="detalheStatus"></dd></div>
+        <div id="detalheMotivoLinha" hidden><dt>Motivo do cancelamento</dt><dd id="detalheMotivo"></dd></div>
     </dl>
 
     <div class="modal__actions">
         <button type="button" class="btn btn--secondary" commandfor="modalDetalhes" command="close">Fechar</button>
         <button type="button" class="btn btn--danger" id="btnCancelarAgendamento">Cancelar agendamento</button>
     </div>
+</dialog>
+
+<dialog class="modal" id="modalCancelar" aria-labelledby="modalCancelarTitulo">
+    <div class="card__header modal__header">
+        <h2 class="card__title" id="modalCancelarTitulo">Cancelar este agendamento?</h2>
+        <p class="card__desc">Essa ação libera o horário na agenda.</p>
+    </div>
+
+    <form method="dialog" class="form" id="formCancelamento">
+        <div class="modal__summary modal__summary--stacked">
+            <p><strong id="cancelarCliente"></strong> · <span id="cancelarProfissional"></span></p>
+            <p id="cancelarProcedimentos"></p>
+            <p id="cancelarQuando"></p>
+        </div>
+
+        <div class="field">
+            <label for="motivo" class="label">Motivo (opcional)</label>
+            <textarea id="motivo" class="input input--textarea" name="motivo" placeholder="Ex.: cliente remarcou"></textarea>
+        </div>
+
+        <div class="modal__actions">
+            <button type="button" class="btn btn--secondary" commandfor="modalCancelar" command="close">Voltar</button>
+            <button type="submit" class="btn btn--danger">Confirmar cancelamento</button>
+        </div>
+    </form>
 </dialog>
 
 <template id="procedimentoTemplate">

@@ -55,24 +55,6 @@ function formatarValor(valor) {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: casas, maximumFractionDigits: casas });
 }
 
-/* === 4. DADOS INICIAIS === */
-/* EXEMPLOS PARA TESTAR A AGENDA ENQUANTO AS PÁGINAS DE PROFISSIONAIS E PROCEDIMENTOS NÃO FICAM PRONTAS. SÓ SALVA SE A CHAVE AINDA NÃO EXISTIR */
-if (!localStorage.getItem('profissionais')) {
-    salvarDados('profissionais', [
-        { id: 1, nome: 'Dra. Paula' },
-        { id: 2, nome: 'Dr. Marcos' },
-        { id: 3, nome: 'Est. Carla' }
-    ]);
-}
-
-if (!localStorage.getItem('procedimentos')) {
-    salvarDados('procedimentos', [
-        { id: 1, nome: 'Limpeza de pele', duracao: 60, valor: 120 },
-        { id: 2, nome: 'Peeling', duracao: 60, valor: 180 },
-        { id: 3, nome: 'Massagem relaxante', duracao: 60, valor: 150 }
-    ]);
-}
-
 /* BOTÃO "SAIR" DA NAV. O if É PORQUE A TELA DE LOGIN NÃO TEM NAV */
 const sairBtn = document.querySelector('#sairBtn');
 

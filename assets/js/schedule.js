@@ -71,11 +71,8 @@ function paraHorario(minutos) {
     return `${h}:${m}`;
 }
 
-function formatarValor(valor) {
-    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0 });
-}
-function formatarValor(valor) {
-    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0 });
+function formatarDuracao(minutos) {
+    return `${Math.floor(minutos / 60)}h${String(minutos % 60).padStart(2, '0')}`;
 }
 
 /* DATA NO FORMATO DO input date (2026-09-21). NÃO USAR toISOString: ELE CONVERTE PARA UTC E, À NOITE, PULA PARA O DIA SEGUINTE */

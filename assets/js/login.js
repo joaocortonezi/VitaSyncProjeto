@@ -29,7 +29,7 @@ loginForm.addEventListener('submit', (evento) => {
     const armazenamento = lembrar ? localStorage : sessionStorage;
     armazenamento.setItem('usuarioLogado', email);
 
-    window.location.href = '../pages/schedule.html';
+    window.location.href = 'pages/schedule.html';
 });
 
 /* ESCONDE O ERRO QUANDO A PESSOA VOLTA A DIGITAR */

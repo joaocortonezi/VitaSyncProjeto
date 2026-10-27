@@ -7,7 +7,7 @@ const USUARIO = {
 
 /* SE JÁ ESTÁ LOGADO, VAI DIRETO PARA A AGENDA */
 if (usuarioLogado()) {
-    window.location.href = 'schedule.html';
+    window.location.href = 'pages/schedule.html';
 }
 
 const loginForm = document.querySelector('#loginForm');
@@ -29,7 +29,7 @@ loginForm.addEventListener('submit', (evento) => {
     const armazenamento = lembrar ? localStorage : sessionStorage;
     armazenamento.setItem('usuarioLogado', email);
 
-    window.location.href = 'schedule.html';
+    window.location.href = '../pages/schedule.html';
 });
 
 /* ESCONDE O ERRO QUANDO A PESSOA VOLTA A DIGITAR */

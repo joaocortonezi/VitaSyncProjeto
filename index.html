@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+    <script src="assets/js/scripts.js" defer></script>
+    <script src="assets/js/login.js" defer></script>
+    <title>VitaSync</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="login">
+        <section class="login__welcome">
+            <div class="login__welcome-box">
+                <p class="logo">Vita<strong>Sync</strong></p>
+
+                <div class="login__welcome-texts">
+                    <h1 class="login__title">A agenda da clínica em um só lugar!</h1>
+                    <p class="login__desc">Clientes, profissionais e procedimentos organizados, com horários sem conflito.</p>
+                </div>
+
+                <p class="login__obs">Sistema de Agendamento · Projeto Interdisciplinar ADS</p>
+            </div>   
+        </section>
+
+        <section class="login__form-side">
+            <div class="login__form-box">
+                <div class="card__header">
+                    <h2 class="card__title">Entrar</h2>
+                    <p class="card__desc">Acesso restrito a usuários cadastrados.</p>
+                </div>
+
+                <form action="#" class="form" id="loginForm">
+                    <div class="field">
+                        <label for="email" class="label">E-mail</label>
+                        <input type="email" id="email" class="input" name="email" placeholder="seuemail@email.com" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="senha" class="label">Senha</label>
+                        <input type="password" id="senha" class="input" name="senha" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="login__options">
+                        <label class="checkbox">
+                            <input type="checkbox" name="lembrar"> Lembrar acesso
+                        </label>
+
+                        <a href="#" class="link">Esqueceu a senha?</a>
+                    </div>
+                    
+                    <p class="error" id="loginError" hidden>
+                        <svg class="error__icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/>
+                            <path d="M12 9v4"/>
+                            <path d="M12 17h.01"/>
+                        </svg>
+
+                        E-mail ou senha inválidos
+                    </p>
+
+                    <button type="submit" class="btn btn--full">Entrar</button>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -23,7 +23,7 @@ function usuarioLogado() {
 /* CHAMADA NO INÍCIO DAS PÁGINAS INTERNAS. SEM LOGIN, VOLTA PARA A TELA DE LOGIN */
 function exigirLogin() {
     if (!usuarioLogado()) {
-        window.location.href = 'index.html';
+        window.location.href = '../index.html';
     }
 }
 
@@ -62,6 +62,6 @@ if (sairBtn) {
     sairBtn.addEventListener('click', () => {
         localStorage.removeItem('usuarioLogado');
         sessionStorage.removeItem('usuarioLogado');
-        window.location.href = 'index.html';
+        window.location.href = '../index.html';
     });
 }

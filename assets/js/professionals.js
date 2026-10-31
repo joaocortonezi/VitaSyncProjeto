@@ -10,6 +10,7 @@ const numeroRegistroInput = document.querySelector('#numeroRegistro');
 const especialidadeInput = document.querySelector('#especialidade');
 const procedimentosLista = document.querySelector('#procedimentosLista');
 const procedimentoTemplate = document.querySelector('#procedimentoTemplate');
+const profissionaisLista = document.querySelector('#profissionaisLista');
 const cpfError = document.querySelector('#cpfError');
 const salvoAviso = document.querySelector('#salvoAviso');
 
@@ -64,7 +65,42 @@ function validarProcedimentos() {
 
 procedimentosLista.addEventListener('change', validarProcedimentos);
 
-/* === 3. CADASTRO === */
+/* === 3. LISTA === */
+function renderizarProfissionais() {
+    const profissionais = lerDados('profissionais');
+
+    profissionaisLista.replaceChildren(); /* LIMPA A LISTA ANTES DE DESENHAR DE NOVO */
+
+    if (profissionais.length === 0) {
+        const vazio = document.createElement('li');
+        vazio.className = 'professionals__empty';
+        vazio.textContent = 'Nenhum profissional cadastrado';
+        profissionaisLista.append(vazio);
+        return;
+    }
+
+    profissionais
+        .sort((a, b) => a.nome.localeCompare(b.nome))
+        .forEach(profissional => {
+            const item = document.createElement('li');
+            item.className = 'professionals__item';
+
+            const nome = document.createElement('span');
+            nome.textContent = profissional.nome;
+
+            /* PROFISSIONAL ANTIGO, DE ANTES DO FORMULÁRIO, NÃO TEM REGISTRO */
+            const registro = profissional.tipoRegistro ? `${profissional.tipoRegistro} ${profissional.numeroRegistro}` : '';
+
+            const info = document.createElement('span');
+            info.className = 'professionals__item-info';
+            info.textContent = [registro, profissional.especialidade].filter(Boolean).join(' · ');
+
+            item.append(nome, info);
+            profissionaisLista.append(item);
+        });
+}
+
+/* === 4. CADASTRO === */
 profissionalForm.addEventListener('submit', (evento) => {
     evento.preventDefault();
 
@@ -90,7 +126,8 @@ profissionalForm.addEventListener('submit', (evento) => {
 
     salvarDados('profissionais', profissionais);
     profissionalForm.reset();
-    salvoAviso.hidden = false; /* NÃO TEM LISTA NESTA TELA, ENTÃO O AVISO CONFIRMA QUE SALVOU */
+    renderizarProfissionais();
+    salvoAviso.hidden = false;
 });
 
 /* O reset ACONTECE DEPOIS DO EVENTO, ENTÃO O setTimeout CONFERE OS CHECKBOXES JÁ DESMARCADOS */
@@ -106,3 +143,4 @@ profissionalForm.addEventListener('input', () => {
 
 preencherProcedimentos();
 validarProcedimentos();
+renderizarProfissionais();

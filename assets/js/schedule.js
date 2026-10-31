@@ -19,6 +19,7 @@ const btnNovoAgendamento = document.querySelector('#btnNovoAgendamento');
 const formAgendamento = document.querySelector('#formAgendamento');
 const clienteSelect = document.querySelector('#cliente');
 const profissionalSelect = document.querySelector('#profissional');
+const procedimentoSelect = document.querySelector('#procedimento');
 const procedimentosLista = document.querySelector('#procedimentosLista');
 const procedimentoTemplate = document.querySelector('#procedimentoTemplate');
 const dataInput = document.querySelector('#data');
@@ -56,7 +57,7 @@ const motivoInput = document.querySelector('#motivo');
 let diaAtual = new Date();
 diaAtual.setHours(0, 0, 0, 0);
 
-let itensProcedimento = []; /* CHECKBOX E QTD DE CADA PROCEDIMENTO DO MODAL */
+let itensProcedimento = []; /* PROCEDIMENTOS ESCOLHIDOS NO MODAL, COM A QTD DE CADA UM */
 let agendamentoAbertoId = null; /* AGENDAMENTO QUE ESTÁ NO MODAL DE DETALHES */
 
 /* === 1. FUNÇÕES DE APOIO === */
@@ -161,24 +162,37 @@ function preencherModal() {
     lerDados('profissionais')
         .forEach(profissional => profissionalSelect.append(new Option(profissional.nome, profissional.id)));
 
-    itensProcedimento = lerDados('procedimentos').map(procedimento => {
-        const item = procedimentoTemplate.content.cloneNode(true).firstElementChild;
-        const checkbox = item.querySelector('input[type="checkbox"]');
-        const qtdInput = item.querySelector('.modal__qty-input');
-
-        checkbox.value = procedimento.id;
-        qtdInput.name = `qtd-${procedimento.id}`;
-        item.querySelector('.modal__procedure-text').textContent =
-            `${procedimento.nome} · ${procedimento.duracao} min · ${formatarValor(procedimento.valor)}`;
-
-        procedimentosLista.append(item);
-        return { procedimento, checkbox, qtdInput };
+    lerDados('procedimentos').forEach(procedimento => {
+        const texto = `${procedimento.nome} · ${procedimento.duracao} min · ${formatarValor(procedimento.valor)}`;
+        procedimentoSelect.append(new Option(texto, procedimento.id));
     });
+}
+
+/* CADA PROCEDIMENTO ESCOLHIDO NO SELECT VIRA UMA LINHA NA LISTA, COM QTD E BOTÃO DE REMOVER */
+function adicionarProcedimento() {
+    const opcao = procedimentoSelect.selectedOptions[0];
+    const procedimento = buscarPorId('procedimentos', Number(opcao.value));
+    const linha = procedimentoTemplate.content.cloneNode(true).firstElementChild;
+    const item = { procedimento, opcao, qtdInput: linha.querySelector('.modal__qty-input') };
+
+    linha.querySelector('.modal__procedure-text').textContent = opcao.text;
+    linha.querySelector('.modal__remove').addEventListener('click', () => {
+        linha.remove();
+        opcao.disabled = false;
+        itensProcedimento = itensProcedimento.filter(outro => outro !== item);
+        atualizarFormulario();
+    });
+
+    procedimentosLista.append(linha);
+    itensProcedimento.push(item);
+
+    opcao.disabled = true; /* O MESMO PROCEDIMENTO NÃO ENTRA DUAS VEZES: PARA ISSO EXISTE A QTD */
+    procedimentoSelect.value = '';
+    atualizarFormulario();
 }
 
 function procedimentosSelecionados() {
     return itensProcedimento
-        .filter(item => item.checkbox.checked)
         .map(item => ({ procedimento: item.procedimento, qtd: Number(item.qtdInput.value) || 1 }));
 }
 
@@ -191,11 +205,6 @@ function calcularTotais(selecionados) {
 
 /* RODA A CADA MUDANÇA NO FORM: ATUALIZA O RESUMO E CONFERE AS REGRAS */
 function atualizarFormulario() {
-    /* QTD SÓ FICA EDITÁVEL COM O PROCEDIMENTO MARCADO */
-    itensProcedimento.forEach(item => {
-        item.qtdInput.disabled = !item.checkbox.checked;
-    });
-
     const selecionados = procedimentosSelecionados();
     const { duracao, valor } = calcularTotais(selecionados);
 
@@ -206,10 +215,8 @@ function atualizarFormulario() {
     alertaConflito.hidden = true;
     btnConfirmar.disabled = false;
 
-    /* PELO MENOS UM PROCEDIMENTO. O AVISO APARECE NO PRIMEIRO CHECKBOX */
-    if (itensProcedimento.length) {
-        itensProcedimento[0].checkbox.setCustomValidity(selecionados.length ? '' : 'Selecione pelo menos um procedimento.');
-    }
+    /* PELO MENOS UM PROCEDIMENTO. O AVISO APARECE NO SELECT */
+    procedimentoSelect.setCustomValidity(selecionados.length ? '' : 'Selecione pelo menos um procedimento.');
 
     /* O RESTO SÓ DÁ PRA CONFERIR COM HORÁRIO E PROCEDIMENTO ESCOLHIDOS */
     if (!horaInput.value || duracao === 0) return;
@@ -249,6 +256,11 @@ function atualizarFormulario() {
 /* DEIXA O FORM LIMPO E COM A DATA DO DIA QUE ESTÁ NA TELA */
 function limparFormulario() {
     formAgendamento.reset();
+    itensProcedimento.forEach(item => {
+        item.opcao.disabled = false;
+    });
+    itensProcedimento = [];
+    procedimentosLista.replaceChildren();
     dataInput.value = paraDataISO(diaAtual);
     atualizarFormulario();
 }
@@ -359,6 +371,7 @@ btnCancelarAgendamento.addEventListener('click', abrirCancelamento);
 diaAnterior.addEventListener('click', () => mudarDia(-1));
 diaSeguinte.addEventListener('click', () => mudarDia(1));
 btnNovoAgendamento.addEventListener('click', limparFormulario);
+procedimentoSelect.addEventListener('change', adicionarProcedimento);
 formAgendamento.addEventListener('input', atualizarFormulario);
 
 preencherModal();

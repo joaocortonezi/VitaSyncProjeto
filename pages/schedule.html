@@ -103,8 +103,11 @@
         <fieldset class="field">
             <legend class="label">Procedimentos <span aria-hidden="true">*</span></legend>
 
-            <div class="modal__procedures" id="procedimentosLista">
-            </div>
+            <select id="procedimento" class="input" name="procedimento" aria-label="Adicionar procedimento">
+                <option value="" disabled selected>Selecione um procedimento</option>
+            </select>
+
+            <ul class="modal__procedures" id="procedimentosLista"></ul>
         </fieldset>
 
         <div class="modal__row">
@@ -183,16 +186,14 @@
 </dialog>
 
 <template id="procedimentoTemplate">
-    <div class="modal__procedure">
-        <label class="checkbox">
-            <input type="checkbox" name="procedimento">
-            <span class="modal__procedure-text"></span>
-        </label>
+    <li class="modal__procedure">
+        <span class="modal__procedure-text"></span>
         <label class="modal__qty">
             · qtd:
             <input type="number" class="modal__qty-input" min="1" value="1">
         </label>
-    </div>
+        <button type="button" class="modal__remove" aria-label="Remover procedimento">✕</button>
+    </li>
 </template>
 
 <template id="agendamentoTemplate">
